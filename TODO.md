@@ -5,3 +5,7 @@
 ## sysctl
 
 - split the cust file
+
+## zram
+
+- xfs to ext4
