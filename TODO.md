@@ -13,3 +13,7 @@
 ## ds
 
 - test voice on pc tweaked
+
+## format/mount
+
+- foobar and etc
