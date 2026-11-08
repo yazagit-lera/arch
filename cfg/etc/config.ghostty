@@ -1,15 +1,15 @@
 font-size = 14
 
-shell-integration = zsh
+shell-integration = bash
 shell-integration-features = no-cursor
 window-padding-balance = true
 window-theme = ghostty
-palette-generate = false
 
 cursor-color = ffffff
 background = 101020
 foreground = b2b2b2
 
+palette-generate = false
 palette = 0=101020
 palette = 1=ff9393
 palette = 2=28cc28
