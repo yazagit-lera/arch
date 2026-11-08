@@ -17,3 +17,7 @@
 ## format/mount
 
 - foobar and etc
+
+##
+
+- kernel stock
