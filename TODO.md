@@ -9,3 +9,7 @@
 ## zram
 
 - xfs to ext4
+
+## ds
+
+- test voice on pc tweaked
