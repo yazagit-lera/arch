@@ -1,2 +1,7 @@
-# gsettings
-no cursor blink, dark theme
+## gsettings
+
+- no cursor blink, dark theme
+
+## sysctl
+
+- split the cust file
