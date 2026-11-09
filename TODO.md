@@ -1,23 +1,27 @@
 ## gsettings
 
-- no cursor blink, dark theme
+no cursor blink, dark theme
 
 ## sysctl
 
-- split the cust file
+split the cust file
 
 ## zram
 
-- xfs to ext4
+xfs to ext4
 
 ## ds
 
-- test voice on pc tweaked
+test voice on pc tweaked
 
 ## format/mount
 
-- foobar and etc
+foobar and etc
 
-##
+## kernel
 
-- kernel stock
+kernel stock
+
+## limitsconf
+
+test pc ulimit core
