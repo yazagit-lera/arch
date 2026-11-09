@@ -18,7 +18,7 @@ usage() {
   exit "${1}"
 }
 
-adbwait() {
+adb_wait() {
   echo '- Waiting for device...'
   adb wait-for-device
 }
@@ -28,8 +28,7 @@ remote_list() {
   local remote_num="${2}"
 
   local list
-  list="$(adb shell -nT find ${remote_path}/* -type f \
-            -exec basename -a {} \+)"
+  list="$(adb exec-out ls ${remote_path})"
 
   if [[ -n "${remote_num}" ]]; then
     echo "${list}" | sed -n "${remote_num}p"
@@ -93,7 +92,7 @@ main() {
     f) push "${remote_path}" "${compression}" "${file}" ;;
     n) pull "${remote_path}" "${compression}" "${remote_num}" ;;
     l)
-      adbwait
+      adb_wait
       remote_list "${remote_path}"
       ;;
     *) usage 1 >&2 ;;
