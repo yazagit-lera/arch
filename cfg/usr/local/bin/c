@@ -1,26 +1,27 @@
 #!/usr/bin/env bash
 #
-# Get command path
-set -e
+# Get the command path
+set -e -o pipefail
 
 usage() {
-  echo "usage: ${0##*/} [-h] COMMAND"
-  echo
-  echo 'get command path'
-  echo
-  echo 'options:'
-  echo '  -h  show this help message and exit'
+    local status="${1}"
 
-  exit "${1}"
+    echo "Usage: ${0##*/} [-h] COMMAND"
+    echo
+    echo 'Get the command path'
+    echo
+    echo 'Options:'
+    echo '  -h  Show this help message and exit'
+    exit "${status}"
 }
 
 main() {
-  local command="${@}"
+  local cmd="${1}"
 
-  ((${#} == 0)) && usage 1 >&2
-  [[ "${@}" == '-h' ]] && usage 0
+  (("${#}" == 0)) && usage 1
+  [[ "${1}" == '-h' ]] && usage 0
 
   command -v "${command}"
 }
 
-main "${@}"
+main "${1}"
