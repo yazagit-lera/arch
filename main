@@ -55,8 +55,7 @@ disk_partition() {
     -n2::+ -t2:8304 -c2:'Arch Linux Root' -p "${blk}"
 
   mkfs.fat -F32 -n 'ESP' -v -S512 --codepage=437 "${blk}"*1
-  mkfs.btrfs -fK -L 'archlinux' -O 'block-group-tree' -n65536 \
-    -m single "${blk}"*2
+  mkfs.btrfs -fK -L 'archlinux' "${blk}"*2
 
   local btrfs_opts
   btrfs_opts='noatime,nodiscard,nobarrier,commit=300,lazytime,ssd'
