@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Arch linux install
-set -e
+set -e -o pipefail
 
 usage() {
   echo "usage: ${0##*/} [-h] -n USERNAME -t TIMEZONE -l LAYOUT -d DISK"
