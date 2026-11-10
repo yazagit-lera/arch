@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
-#
-# mkfs alias for zram-generator
-set -e
+# SPDX-License-Identifier: 0BSD
+# zram-generator
+set -e -o pipefail
 
-mkfs.xfs -Kfq -i 'size=1024' -l 'size=64M' "${@}"
+main() {
+    local args="${@}"
+
+    mke2fs -t ext4 -Fq -m0 -O "^has_journal,^metadata_csum,^metadata_csum_seed,^resize_inode,^extra_isize,sparse_super2,uninit_bg" "${args}"
+}
+
+main "${@}"
