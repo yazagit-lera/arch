@@ -74,8 +74,8 @@ pkg_strap() {
     exfatprogs dosfstools android-tools \
     flatpak zram-generator nano python mandoc less \
     unzip polkit \
-    ghostty btrfs-progs \
-    brightnessctl xdg-user-dirs \
+    ghostty doas \
+    xdg-user-dirs \
     vulkan-radeon mesa vulkan-mesa-layers bluez{,-utils} \
     iptables adwaita-fonts pipewire{,-pulse,-jack} \
     gnome-shell ${fwpkglist}
