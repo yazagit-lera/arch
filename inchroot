@@ -34,7 +34,6 @@ basic_setup() {
 
   ln -sf "/usr/share/zoneinfo/${timezone}" /etc/localtime
   hwclock -w --utc
-  echo 'arch' > /etc/hostname
   usermod --lock -s /usr/bin/nologin root
 
   useradd --create-home -G 'wheel,video' -s /usr/bin/zsh "${username}"
