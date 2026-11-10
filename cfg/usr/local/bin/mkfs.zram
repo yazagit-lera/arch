@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
+# zram-generator
+set -e -o pipefail
+
+main() {
+    local args="${@}"
+
+    local options
+    options='^has_journal,^metadata_csum,^metadata_csum_seed,^resize_inode'
+    options+=',^extra_isize,sparse_super2,uninit_bg'
+    local extended_options
+    extended_options='num_backup_sb=0,lazy_itable_init=1'
+    extended_options+=',assume_storage_prezeroed=1,nodiscard'
+
+    mke2fs -t ext4 -Fq -m0 -O "${options}" -E "${extended_options}" "${args}"
+}
+
+main "${@}"
