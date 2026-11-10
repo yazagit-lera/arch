@@ -6,7 +6,11 @@ set -e -o pipefail
 main() {
     local args="${@}"
 
-    mke2fs -t ext4 -Fq -m0 -O ^has_journal,^metadata_csum,^metadata_csum_seed,^resize_inode,^extra_isize,sparse_super2,uninit_bg -E num_backup_sb=0,lazy_itable_init=1,assume_storage_prezeroed=1,nodiscard "${args}"
+    local options
+    options='^has_journal,^metadata_csum,^metadata_csum_seed,^resize_inode,^extra_isize,sparse_super2,uninit_bg'
+    local ext_options
+    ext_options='num_backup_sb=0,lazy_itable_init=1,assume_storage_prezeroed=1,nodiscard'
+    mke2fs -t ext4 -Fq -m0 -O  -E  "${args}"
 }
 
 main "${@}"
