@@ -1,19 +1,19 @@
-## gsettings
+###### gsettings
 
 no cursor blink, dark theme
 
-## zram
+###### zram
 
 xfs to ext4
 
-## format/mount
+###### format/mount
 
 foobar and etc
 
-## kernel
+###### kernel
 
 kernel stock
 
-## live files
+###### live files + yml
 
 instead of in script
