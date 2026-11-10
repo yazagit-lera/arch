@@ -2,17 +2,9 @@
 
 no cursor blink, dark theme
 
-## sysctl
-
-split the cust file
-
 ## zram
 
 xfs to ext4
-
-## ds
-
-test voice on pc tweaked
 
 ## format/mount
 
@@ -22,6 +14,6 @@ foobar and etc
 
 kernel stock
 
-## limitsconf
+## live files
 
-test pc ulimit core
+instead of in script
