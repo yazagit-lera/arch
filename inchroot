@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # System tune in chroot
-set -e
+set -e -o pipefail
 
 usage() {
   echo "usage: ${0##*/} [-h] -n USERNAME -p PASSWORD -t TIMEZONE -l LAYOUT"
@@ -18,21 +18,12 @@ usage() {
   exit "${1}"
 }
 
-bootloader_setup() {
-  sbctl create-keys
-  sbctl enroll-keys --microsoft
-  sbctl sign -s -o /usr/lib/systemd/boot/efi/systemd-bootx64.efi{.signed,}
-  sbctl sign -s /boot/vmlinuz-linux-zen
-
-  bootctl install --esp-path=/boot
-}
-
 systemd_units() {
   systemctl enable \
-    systemd-networkd systemd-resolved systemd-networkd-persistent-storage \
+    NetworkManager \
     systemd-timesyncd bluetooth fstrim.timer
 
-  systemctl mask sshd systemd-networkd-wait-online  
+  systemctl mask NetworkManager-wait-online
 }
 
 basic_setup() {
@@ -43,17 +34,13 @@ basic_setup() {
 
   ln -sf "/usr/share/zoneinfo/${timezone}" /etc/localtime
   hwclock -w --utc
-  hostnamegen > /etc/hostname
-  setcap 'CAP_SYS_NICE=eip' "$(command -v gamescope)"
-  usermod --lock -s /usr/bin/nologin root  # Lock the root account
+  echo 'arch' > /etc/hostname
+  usermod --lock -s /usr/bin/nologin root
 
-  # Create a new user
-  rm -f /etc/skel/.bash*
   useradd --create-home -G 'wheel,video' -s /usr/bin/zsh "${username}"
   echo "${username}:${password}" | chpasswd
 
   pacman -Scc --noconfirm
-  echo "\$layout = ${layout}" > /etc/hypr/layout.conf
 }
 
 main() {
@@ -77,8 +64,7 @@ main() {
   bsdtar --uid 0 --gid 0 -x -f /mnt/cfg.tar -C /
   basic_setup "${username}" "${password}" "${timezone}" "${layout}"
   systemd_units
-  bootloader_setup
-  echo '- Exiting chroot'
+  bootctl install --esp-path=/boot
 }
 
 main "${@}"
