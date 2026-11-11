@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#
+# SPDX-License-Identifier: 0BSD
 # Post install
 set -e -o pipefail
 
