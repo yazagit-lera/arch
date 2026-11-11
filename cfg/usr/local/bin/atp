@@ -72,7 +72,7 @@ main() {
                 ;;
             l) local cmd="${arg}" ;;
             h) usage 0 ;;
-            *) usage 1 >&2 ;;
+            *) usage 1 ;;
         esac
     done
 
