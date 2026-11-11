@@ -3,21 +3,6 @@
 # System tune in chroot
 set -e -o pipefail
 
-usage() {
-  echo "usage: ${0##*/} [-h] -n USERNAME -p PASSWORD -t TIMEZONE -l LAYOUT"
-  echo
-  echo 'system setup in chroot'
-  echo
-  echo 'options:'
-  echo '  -h           show this help message and exit'
-  echo '  -n USERNAME  specify username'
-  echo '  -p PASSWORD  specify password'
-  echo '  -t TIMEZONE  specify timezone'
-  echo '  -l LAYOUT    specify keyboard layout (e.g. us,ru)'
-
-  exit "${1}"
-}
-
 systemd_units() {
   systemctl enable \
     NetworkManager \
@@ -27,43 +12,28 @@ systemd_units() {
 }
 
 basic_setup() {
-  local username="${1}"
+  local user_name="${1}"
   local password="${2}"
-  local timezone="${3}"
-  local layout="${4}"
 
-  ln -sf "/usr/share/zoneinfo/${timezone}" /etc/localtime
+  ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
   hwclock -w --utc
-  usermod --lock -s /usr/bin/nologin root
 
-  useradd --create-home -G 'wheel,video' -s /usr/bin/zsh "${username}"
-  echo "${username}:${password}" | chpasswd
+  usermod --lock -s /usr/bin/nologin root
+  useradd --create-home -G wheel,video -s /usr/bin/bash "${user_name}"
+  echo "${user_name}:${password}" | chpasswd
 
   pacman -Scc --noconfirm
 }
 
 main() {
-  local OPTARG
-  local arg
+  local user_name="${1}"
+  local password="${2}"
 
-  # Parse args
-  ((${#} == 0)) && usage 1 >&2
-  while getopts 'hn:p:t:l:' arg; do
-    case "${arg}" in
-      n) local username="${OPTARG}" ;;
-      p) local password="${OPTARG}" ;;
-      t) local timezone="${OPTARG}" ;;
-      l) local layout="${OPTARG}" ;;
-      h) usage 0 ;;
-      *) usage 1 >&2 ;;
-    esac
-  done
-
-  echo '- CHROOT'
-  bsdtar --uid 0 --gid 0 -x -f /mnt/cfg.tar -C /
-  basic_setup "${username}" "${password}" "${timezone}" "${layout}"
+  echo '- chroot'
+  tar --uid 0 --gid 0 -x -f /mnt/cfg.tar -C /
+  basic_setup "${user_name}" "${password}"
   systemd_units
   bootctl install --esp-path=/boot
 }
 
-main "${@}"
+main "${1}" "${2}"
