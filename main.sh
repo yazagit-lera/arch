@@ -1,25 +1,7 @@
 #!/usr/bin/env bash
-#
-# Arch linux install
+# SPDX-License-Identifier: 0BSD
+# Install arch linux
 set -e -o pipefail
-
-usage() {
-  echo "usage: ${0##*/} [-h] -n USERNAME -t TIMEZONE -l LAYOUT -d DISK"
-  echo '  -f FIRMWARE'
-  echo
-  echo 'arch linux installer'
-  echo
-  echo 'options:'
-  echo '  -h           show this help message and exit'
-  echo '  -n USERNAME  specify username'
-  echo '  -t TIMEZONE  specify timezone'
-  echo '  -l LAYOUT    specify keyboard layout (e.g. us,ru)'
-  echo '  -d DISK      specify target disk (e.g. sda)'
-  echo '  -f FIRMWARE  specify a firmware list to install'
-  echo "               (e.g. 'amdgpu realtek')"
-
-  exit "${1}"
-}
 
 setup_pacman() {
   local pacmanconf
@@ -70,7 +52,7 @@ disk_partition() {
   mount -t vfat -v -o  "${fat_options}" "${root}" /mnt/boot
 }
 
-pkg_strap() {
+bootstrap() {
   pacstrap /mnt base linux booster amd-ucode \
     exfatprogs dosfstools android-tools \
     flatpak zram-generator nano python mandoc less \
@@ -82,33 +64,12 @@ pkg_strap() {
     gnome-shell ${fwpkglist}
 }
 
-setup_chroot() {
-  local username="${1}"
-  local password="${2}"
-  local timezone="${3}"
-  local layout="${4}"
+post_install() {
+  local password="${1}"
 
   mount -o bind,ro -v /tmp/arch39 /mnt/mnt
-  arch-chroot /mnt bash /mnt/inchroot -n "${username}" -p "${password}" \
-    -t "${timezone}" -l "${layout}"
+  arch-chroot /mnt bash /mnt/chroot.sh "${password}"
   umount -v /mnt/mnt
-}
-
-ask-password() {
-  local password1
-  password1="$(systemd-ask-password --echo=no \
-    --emoji=no 'Enter a new password')"
-
-  local password2
-  password2="$(systemd-ask-password --echo=no \
-    --emoji=no 'Retype the password')"
-
-  if [[ "${password1}" == "${password2}" ]]; then
-    echo "${password1}"
-  else
-    echo '! The passwords do not match' >&2
-    exit 1
-  fi
 }
 
 end() {
@@ -117,23 +78,6 @@ end() {
 }
 
 main() {
-  local OPTARG
-  local arg
-
-  # Parse args
-  ((${#} == 0)) && usage 1 >&2
-  while getopts 'hn:t:l:d:f:' arg; do
-    case "${arg}" in
-      n) local username="${OPTARG}" ;;
-      t) local timezone="${OPTARG}" ;;
-      l) local layout="${OPTARG}" ;;
-      d) local blk="${OPTARG}" ;;
-      f) local fwlist="${OPTARG}" ;;
-      h) usage 0 ;;
-      *) usage 1 >&2 ;;
-    esac
-  done
-
   local password
   password="$(ask-password)"
 
