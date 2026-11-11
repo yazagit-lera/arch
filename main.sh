@@ -37,12 +37,12 @@ disk_partition() {
     -n1:0:+512M -t1:ef00 -c1:'EFI System Partition' \
     -n2:0:0 -t2:8304 -c2:'Arch Linux Root' -p "${disk}"
 
-  mkfs.fat -F32 -n 'ESP' -v --codepage=437 "${efi}"
-  mkfs.btrfs -fK -L 'archlinux' "${root}"
+  mkfs.fat -F32 -n ESP -v --codepage=437 "${efi}"
+  mkfs.btrfs -fK -L archlinux --csum xxhash "${root}"
 
   local btrfs_options
   btrfs_options='noatime,nodiscard,nobarrier,commit=300,lazytime,ssd'
-  btrfs_options+='compress=zstd:3'
+  btrfs_options+='compress-force=zstd'
 
   local fat_options
   fat_options='noexec,nodev,nosuid,noatime,fmask=0177,dmask=0077'
