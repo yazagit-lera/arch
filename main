@@ -38,34 +38,36 @@ setup_pacman() {
 }
 
 disk_partition() {
-  local rblk="${1}"
-  local blk="/dev/${blk}"
+  local block='nvme0n1'
+  local disk='/dev/nvme0n1'
+  local efi='/dev/nvme0n1p2'
+  local root='/dev/nvme0n1p2'
 
   mountpoint -q /mnt && umount -R /mnt
 
-  echo 'none' > "/sys/block/${rblk}/queue/scheduler"
-  echo '128' > "/sys/block/${rblk}/queue/nr_requests"
-  echo '2' > "/sys/block/${rblk}/queue/rq_affinity"
+  echo 'none' > "/sys/block/${block}/queue/scheduler"
+  echo '128' > "/sys/block/${block}/queue/nr_requests"
+  echo '2' > "/sys/block/${block}/queue/rq_affinity"
 
-  blkid "${blk}"*? && wipefs --all "${blk}"*?
-  wipefs --all "${blk}"
-  blkdiscard -vf "${blk}"
+  wipefs -a "${disk}"
+  blkdiscard -vf "${disk}"
   sgdisk -Zo \
-    -n1::+64M -t1:ef00 -c1:'EFI System Partition' \
-    -n2::+ -t2:8304 -c2:'Arch Linux Root' -p "${blk}"
+    -n1:0:+512M -t1:ef00 -c1:'EFI System Partition' \
+    -n2:0:0 -t2:8304 -c2:'Arch Linux Root' -p "${disk}"
 
-  mkfs.fat -F32 -n 'ESP' -v --codepage=437 "${blk}"*1
-  mkfs.btrfs -fK -L 'archlinux' "${blk}"*2
+  mkfs.fat -F32 -n 'ESP' -v --codepage=437 "${efi}"
+  mkfs.btrfs -fK -L 'archlinux' "${root}"
 
-  local btrfs_opts
-  btrfs_opts='noatime,nodiscard,nobarrier,commit=300,lazytime,ssd'
-  btrfs_opts+='compress=zstd:3'
-  local fat_opts
-  fat_opts='noexec,nodev,nosuid,noatime,fmask=0177,dmask=0077'
-  fat_opts+='lazytime,X-mount.mkdir=600'
+  local btrfs_options
+  btrfs_options='noatime,nodiscard,nobarrier,commit=300,lazytime,ssd'
+  btrfs_options+='compress=zstd:3'
 
-  mount -t btrfs -v -o "${btrfs_opts}" "${blk}"*2 /mnt
-  mount -t vfat -v -o  "${fat_opts}" "${blk}"*1 /mnt/boot
+  local fat_options
+  fat_options='noexec,nodev,nosuid,noatime,fmask=0177,dmask=0077'
+  fat_options+='lazytime,X-mount.mkdir=600'
+
+  mount -t btrfs -v -o "${btrfs_options}" "${efi}" /mnt
+  mount -t vfat -v -o  "${fat_options}" "${root}" /mnt/boot
 }
 
 pkg_strap() {
