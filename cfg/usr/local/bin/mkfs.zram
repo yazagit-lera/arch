@@ -13,7 +13,7 @@ main() {
     extended_options='num_backup_sb=0,lazy_itable_init=1'
     extended_options+=',assume_storage_prezeroed=1,nodiscard'
 
-    mke2fs -t ext4 -Fq -m0 -O "${options}" -E "${extended_options}" "${args}"
+    mke2fs -t ext4 -F -m0 -O "${options}" -E "${extended_options}" ${args}
 }
 
 main "${@}"
