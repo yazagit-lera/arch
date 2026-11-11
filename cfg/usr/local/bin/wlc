@@ -1,36 +1,36 @@
 #!/usr/bin/env bash
-#
-# adb connect alias
-set -e
+# SPDX-License-Identifier: 0BSD
+# adb connect
+set -e -o pipefail
 
 usage() {
-  echo "usage: ${0##*/} [-h]"
-  echo
-  echo 'adb connect alias'
-  echo
-  echo 'options:'
-  echo '  -h  show this help message and exit'
+    local status="${1}"
 
-  exit "${1}"
+    echo "Usage: ${0##*/} [-h]"
+    echo
+    echo 'adb connect alias'
+    echo
+    echo 'Options:'
+    echo '  -h  Show this help message and exit'
+    exit "${status}"
 }
 
 main() {
-  local ip
+    [[ "${@}" == '-h' ]] && usage 0
+    (("${#}" != 0)) && usage 1
 
-  [[ "${@}" == '-h' ]] && usage 0
-  ((${#} != 0)) && usage 1 >&2
+    adb kill-server
+    adb start-server
 
-  adb kill-server
-  adb start-server
-
-  echo '- Waititng for USB connected device...'
-  adb wait-for-usb-device
-  ip="$(adb exec-out toybox ifconfig -S | grep wlan0 \
-    | awk '{print $2}' | cut -d '/' -f1)"
-  adb tcpip 5555
-  echo '- Disconnect your device from USB'
-  adb wait-for-usb-disconnect
-  adb connect "${ip}:5555"
+    echo '- Waititng for a USB connected device...'
+    adb wait-for-usb-device
+    local ip
+    ip="$(adb exec-out toybox ifconfig -S | grep wlan0 \
+        | awk '{print $2}' | cut -d '/' -f1)"
+    adb tcpip 5555
+    echo '- Disconnect your device from USB'
+    adb wait-for-usb-disconnect
+    adb connect "${ip}:5555"
 }
 
 main "${@}"
