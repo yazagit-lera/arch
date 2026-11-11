@@ -1,102 +1,91 @@
 #!/usr/bin/env bash
-#
-# adb push/pull alias
-set -e
+# SPDX-License-Identifier: 0BSD
+# adb push/pull
+set -e -o pipefail
 
 usage() {
-  echo "usage: ${0##*/} [-h] [-f FILE] [-n NUM] [-l] [-z]"
-  echo
-  echo 'adb push/pull alias'
-  echo
-  echo 'options:'
-  echo '  -h       show this help message and exit'
-  echo '  -f FILE  specify a file to push'
-  echo '  -n NUM   specify a number of file to pull'
-  echo '  -l       view a remote numbered list of files'
-  echo '  -z       disable compression'
+    local status="${1}"
 
-  exit "${1}"
+    echo "Usage: ${0##*/} [-h] [-f FILE] [-n NUM] [-l] [-z]"
+    echo
+    echo 'adb push/pull'
+    echo
+    echo 'options:'
+    echo '  -h       Show this help message and exit'
+    echo '  -f FILE  Set a file to push'
+    echo '  -n NUM   Set a number of file to pull'
+    echo '  -l       View a remote numbered list of files'
+    exit "${status}"
 }
 
 adb_wait() {
-  echo '- Waiting for device...'
-  adb wait-for-device
+    echo '- Waiting for device...'
+    adb wait-for-device
 }
 
 remote_list() {
-  local remote_path="${1}"
-  local remote_num="${2}"
+    local remote_path="${1}"
+    local remote_num="${2}"
 
-  local list
-  list="$(adb exec-out ls ${remote_path})"
+    local list
+    list="$(adb exec-out ls ${remote_path})"
 
-  if [[ -n "${remote_num}" ]]; then
-    echo "${list}" | sed -n "${remote_num}p"
-  else
-    echo "${list}" | nl
-  fi
+    if [[ -n "${remote_num}" ]]; then
+        echo "${list}" | sed -n "${remote_num}p"
+    else
+        echo "${list}" | nl
+    fi
 }
 
 push() {
-  local remote_path="${1}"
-  local compression="${2}"
-  local file="${3}"
+    local remote_path="${1}"
+    local file="${2}"
 
-  adbwait
-  adb exec-out mkdir -p "${remote_path}"
-  adb push -z "${compression}" "${file}" "${remote_path}"
+    adb_wait
+    adb exec-out mkdir -p "${remote_path}"
+    adb push -z none "${file}" "${remote_path}"
 }
 
 pull() {
-  local remote_path="${1}"
-  local compression="${2}"
-  local remote_num="${3}"
+    local remote_path="${1}"
+    local remote_num="${2}"
 
-  adbwait
-  adb pull -z "${compression}" \
-    "${remote_path}/$(remote_list ${remote_path} ${remote_num})" "${HOME}/atp"
+    adb_wait
+    adb pull -z "${compression}" \
+        "${remote_path}/$(remote_list ${remote_path} ${remote_num})" "${HOME}/ap2"
 }
 
 main() {
-  local OPTARG
-  local arg
+    local OPTARG
+    local arg
 
-  # Parse args
-  ((${#} == 0)) && usage 1 >&2
-  local no_comp='false'
-  while getopts 'hf:n:lz' arg; do
-    case "${arg}" in
-      f)
-        local file="${OPTARG}"
-        local cmd="${arg}"
-        ;;
-      n)
-        local remote_num="${OPTARG}"
-        local cmd="${arg}"
-        ;;
-      l) local cmd="${arg}" ;;
-      z) local no_comp='true' ;;
-      h) usage 0 ;;
-      *) usage 1 >&2 ;;
+    (("${#}" == 0)) && usage 1
+    while getopts 'hf:n:lz' arg; do
+        case "${arg}" in
+            f)
+                local file="${OPTARG}"
+                local cmd="${arg}"
+                ;;
+            n)
+                local remote_num="${OPTARG}"
+                local cmd="${arg}"
+                ;;
+            l) local cmd="${arg}" ;;
+            h) usage 0 ;;
+            *) usage 1 >&2 ;;
+        esac
+    done
+
+    local remote_path='/storage/emulated/0/atp'
+    case "${cmd}" in
+        f) push "${remote_path}" "${file}" ;;
+        n) pull "${remote_path}" "${remote_num}" ;;
+        l)
+            adb_wait
+            remote_list "${remote_path}"
+            ;;
+        *) usage 1 >&2 ;;
     esac
-  done
-
-  if "${no_comp}"; then
-    local compression='none'
-  else
-    local compression='zstd'
-  fi
-
-  local remote_path='/storage/emulated/0/atp'
-  case "${cmd}" in
-    f) push "${remote_path}" "${compression}" "${file}" ;;
-    n) pull "${remote_path}" "${compression}" "${remote_num}" ;;
-    l)
-      adb_wait
-      remote_list "${remote_path}"
-      ;;
-    *) usage 1 >&2 ;;
-  esac
 }
 
 main "${@}"
