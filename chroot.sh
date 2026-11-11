@@ -5,7 +5,7 @@ set -e -o pipefail
 
 setup_services() {
   systemctl enable \
-    NetworkManager \
+    NetworkManager gdm \
     systemd-timesyncd bluetooth fstrim.timer
 
   systemctl mask NetworkManager-wait-online
@@ -15,12 +15,12 @@ setup_system() {
   local password="${1}"
   local user_name='foo'
 
-  tar --uid 0 --gid 0 -x -f /mnt/cfg.tar -C /
-  pacman -Scc --noconfirm
-  #bootctl install --esp-path=/boot
-
   ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
   hwclock -w --utc
+
+  tar --uid 0 --gid 0 -x -f /mnt/cfg.tar -C /
+  pacman -Scc --noconfirm
+  bootctl install --esp-path=/boot
 
   usermod --lock -s /usr/bin/nologin root
   useradd --create-home -G wheel,video -s /usr/bin/bash "${user_name}"
