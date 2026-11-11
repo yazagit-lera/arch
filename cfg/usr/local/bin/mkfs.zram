@@ -8,7 +8,9 @@ main() {
 
     local options
     options='^has_journal,^metadata_csum,^metadata_csum_seed,^resize_inode'
-    options+=',^extra_isize,sparse_super2,uninit_bg'
+    options+=',^extra_isize,^orphan_file,sparse_super2,uninit_bg'
+    options+=',inline_data'
+
     local extended_options
     extended_options='num_backup_sb=0,lazy_itable_init=1'
     extended_options+=',assume_storage_prezeroed=1,nodiscard'
