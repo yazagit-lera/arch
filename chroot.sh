@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #
-# System tune in chroot
+# Post install
 set -e -o pipefail
 
-systemd_units() {
+setup_services() {
   systemctl enable \
     NetworkManager \
     systemd-timesyncd bluetooth fstrim.timer
@@ -11,9 +11,9 @@ systemd_units() {
   systemctl mask NetworkManager-wait-online
 }
 
-basic_setup() {
-  local user_name="${1}"
-  local password="${2}"
+setup_system() {
+  local password="${1}"
+  local user_name='foo'
 
   ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
   hwclock -w --utc
@@ -27,13 +27,12 @@ basic_setup() {
 
 main() {
   local password="${1}"
-  local user_name='foo'
 
   echo '- chroot'
   tar --uid 0 --gid 0 -x -f /mnt/cfg.tar -C /
-  basic_setup "${user_name}" "${password}"
-  systemd_units
+  setup_system "${password}"
+  setup_services
   bootctl install --esp-path=/boot
 }
 
-main "${1}" "${2}"
+main "${1}"
