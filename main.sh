@@ -22,7 +22,7 @@ setup_pacman() {
 disk_partition() {
   local block='nvme0n1'
   local disk='/dev/nvme0n1'
-  local efi='/dev/nvme0n1p2'
+  local efi='/dev/nvme0n1p1'
   local root='/dev/nvme0n1p2'
 
   mountpoint -q /mnt && umount -R /mnt
