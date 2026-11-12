@@ -3,30 +3,15 @@
 # adb connect
 set -e -o pipefail
 
-usage() {
-    local status="${1}"
-
-    echo "Usage: ${0##*/} [-h]"
-    echo
-    echo 'adb connect alias'
-    echo
-    echo 'Options:'
-    echo '  -h  Show this help message and exit'
-    exit "${status}"
-}
-
 main() {
-    [[ "${@}" == '-h' ]] && usage 0
-    (("${#}" != 0)) && usage 1
-
     adb kill-server
     adb start-server
 
     echo '- Waititng for a USB connected device...'
     adb wait-for-usb-device
     local ip
-    ip="$(adb exec-out toybox ifconfig -S | grep wlan0 \
-        | awk '{print $2}' | cut -d '/' -f1)"
+    ip="$(adb exec-out toybox ifconfig -S \
+        | awk '/wlan0/ {print $2}' | awk -F/ '{print $1}')"
     adb tcpip 5555
     echo '- Disconnect your device from USB'
     adb wait-for-usb-disconnect
