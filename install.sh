@@ -4,7 +4,6 @@
 set -e -o pipefail
 
 main() {
-    local password="${0}"
     local tmp_dir='/tmp/arch'
 
     if [[ ! -d '/run/archiso' ]]; then
