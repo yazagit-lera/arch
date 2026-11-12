@@ -54,15 +54,7 @@ disk_partition() {
 }
 
 bootstrap() {
-  pacstrap /mnt base linux booster amd-ucode \
-    btrfs-progs exfatprogs dosfstools android-tools \
-    flatpak zram-generator nano python mandoc less \
-    unzip zip polkit \
-    ghostty doas \
-    xdg-user-dirs \
-    vulkan-radeon mesa bluez \
-    iptables adwaita-fonts pipewire-pulse pipewire-jack \
-    gnome-shell ${fwpkglist}
+  pacstrap /mnt
 }
 
 post_install() {
