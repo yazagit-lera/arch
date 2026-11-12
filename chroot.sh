@@ -3,15 +3,14 @@
 # Post install
 set -e -o pipefail
 
-setup_services() {
-  systemctl enable \
-    NetworkManager gdm \
-    systemd-timesyncd bluetooth fstrim.timer
+configure_services() {
+    systemctl enable \
+        NetworkManager gdm systemd-timesyncd bluetooth fstrim.timer
 
-  systemctl mask NetworkManager-wait-online
+    systemctl mask NetworkManager-wait-online
 }
 
-setup_system() {
+configure_system() {
   local password="${1}"
   local user_name='foo'
 
@@ -30,8 +29,8 @@ setup_system() {
 main() {
   local password="${1}"
 
-  setup_system "${password}"
-  setup_services
+  configure_system "${password}"
+  configure_services
 }
 
 main "${1}"
