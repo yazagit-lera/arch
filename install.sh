@@ -19,6 +19,8 @@ main() {
     archive+='/rolling/arch.tar.lz4'
 
     curl -fL "${archive}" | lz4 -dvc | tar -x -C "${tmp_dir}"
+    local password
+    password="$(systemd-ask-password --echo=no --emoji=no 'New password:')"
     bash "${tmp_dir}/main.sh" "${password}"
 }
 
