@@ -7,7 +7,7 @@ main() {
     local blk="${1}"
 
     umount "/dev/${blk}"
-    echo 1 > "/sys/block/${blk}/device/delete"
+    echo '1' > "/sys/block/${blk}/device/delete"
 }
 
 main "${1}"
