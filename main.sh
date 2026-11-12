@@ -4,8 +4,8 @@
 set -e -o pipefail
 
 setup_pacman() {
-  tar -xO -f foo.tar ./etc/pacman.conf /etc/pacman.conf
-  tar -xO -f foo.tar ./etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist
+  tar -xO -f foo.tar ./etc/pacman.conf > /etc/pacman.conf
+  tar -xO -f foo.tar ./etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist
 
   pacman-key --init
   pacman-key --populate archlinux
@@ -46,10 +46,6 @@ disk_partition() {
   mount -t vfat -v -o  "${fat_options}" "${efi}" /mnt/boot
 }
 
-bootstrap() {
-  pacstrap /mnt
-}
-
 post_install() {
   local password="${1}"
 
@@ -68,8 +64,8 @@ main() {
 
   setup_pacman
   disk_partition "${blk}"
-  pkg_strap "${fwlist}"
-  setup_chroot "${username}" "${password}" "${timezone}" "${layout}"
+  pacstrap /mnt $(cat foo)
+  setup_chroot "${password}"
   end
 }
 
