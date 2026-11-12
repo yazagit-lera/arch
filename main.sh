@@ -44,14 +44,14 @@ disk_partition() {
 
   local btrfs_options
   btrfs_options='noatime,nodiscard,nobarrier,commit=300,lazytime,ssd'
-  btrfs_options+='compress-force=zstd:3'
+  btrfs_options+=',compress-force=zstd:3'
 
   local fat_options
   fat_options='noexec,nodev,nosuid,noatime,fmask=0177,dmask=0077'
-  fat_options+='lazytime,X-mount.mkdir=600'
+  fat_options+=',lazytime,X-mount.mkdir=600'
 
-  mount -t btrfs -v -o "${btrfs_options}" "${efi}" /mnt
-  mount -t vfat -v -o  "${fat_options}" "${root}" /mnt/boot
+  mount -t btrfs -v -o "${btrfs_options}" "${root}" /mnt
+  mount -t vfat -v -o  "${fat_options}" "${efi}" /mnt/boot
 }
 
 bootstrap() {
