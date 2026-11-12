@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # SPDX-License-Identifier: 0BSD
 # Download the installer
 set -e -o pipefail
