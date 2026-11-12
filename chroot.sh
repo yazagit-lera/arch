@@ -12,7 +12,7 @@ configure_services() {
 
 configure_system() {
   local password="${1}"
-  local user_name='foo'
+  local user_name='sakikasa'
 
   ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
   hwclock -w --utc
