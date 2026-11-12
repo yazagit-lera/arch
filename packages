@@ -14,6 +14,7 @@ pipewire-pulse
 pipewire-jack
 
 xdg-desktop-portal-gnome
+evince
 gnome-shell
 gnome-control-center
 gnome-keyring
