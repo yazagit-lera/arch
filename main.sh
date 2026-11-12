@@ -36,7 +36,6 @@ disk_partition() {
   sgdisk -Zo \
     -n1:0:+512M -t1:ef00 -c1:'EFI System Partition' \
     -n2:0:0 -t2:8304 -c2:'Arch Linux Root' -p "${disk}"
-
   udevadm wait "${efi}" "${root}"
 
   mkfs.fat -F32 -n ESP -v --codepage=437 "${efi}"
