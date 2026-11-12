@@ -55,13 +55,13 @@ disk_partition() {
 
 bootstrap() {
   pacstrap /mnt base linux booster amd-ucode \
-    exfatprogs dosfstools android-tools \
+    btrfs-progs exfatprogs dosfstools android-tools \
     flatpak zram-generator nano python mandoc less \
-    unzip polkit \
+    unzip zip polkit \
     ghostty doas \
     xdg-user-dirs \
-    vulkan-radeon mesa vulkan-mesa-layers bluez{,-utils} \
-    iptables adwaita-fonts pipewire{,-pulse,-jack} \
+    vulkan-radeon mesa bluez \
+    iptables adwaita-fonts pipewire-pulse pipewire-jack \
     gnome-shell ${fwpkglist}
 }
 
