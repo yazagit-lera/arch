@@ -71,8 +71,7 @@ end() {
 }
 
 main() {
-  local password
-  password="$(ask-password)"
+  local password="${1}"
 
   setup_pacman
   disk_partition "${blk}"
@@ -81,4 +80,4 @@ main() {
   end
 }
 
-main "${@}"
+main "${1}"
