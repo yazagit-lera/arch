@@ -60,7 +60,7 @@ main() {
     local arg
 
     (("${#}" == 0)) && usage 1
-    while getopts 'hf:n:lz' arg; do
+    while getopts 'hf:n:l' arg; do
         case "${arg}" in
             f)
                 local file="${OPTARG}"
