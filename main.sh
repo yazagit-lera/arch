@@ -31,7 +31,7 @@ disk_partition() {
   echo '128' > "/sys/block/${block}/queue/nr_requests"
   echo '2' > "/sys/block/${block}/queue/rq_affinity"
 
-  wipefs -a "${disk}"
+  wipefs -a "${efi}" "${root}" "${disk}"
   blkdiscard -vf "${disk}"
   sgdisk -Zo \
     -n1:0:+512M -t1:ef00 -c1:'EFI System Partition' \
