@@ -4,15 +4,8 @@
 set -e -o pipefail
 
 setup_pacman() {
-  local pacmanconf
-  pacmanconf='https://raw.githubusercontent.com/nedorazrab0/arch39/main/cfg'
-  pacmanconf="${pacmanconf}/etc/pacman.conf"
-  curl -f -o /etc/pacman.conf -- "${pacmanconf}"
-
-  local mirrorconf
-  mirrorconf='https://raw.githubusercontent.com/nedorazrab0/arch39/main/cfg'
-  mirrorconf="${mirrorconf}/etc/pacman.d/mirrorlist"
-  curl -f -o /etc/pacman.d/mirrorlist -- "${mirrorconf}"
+  tar -xO -f foo.tar ./etc/pacman.conf /etc/pacman.conf
+  tar -xO -f foo.tar ./etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist
 
   pacman-key --init
   pacman-key --populate archlinux
