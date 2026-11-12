@@ -1,23 +1,18 @@
+# To do
+
+## BTRFS
+
+> [!WARNING]
+> check scrub unit
+
 ## gsettings
 
 no cursor blink, dark theme
 
-## zram
-
-xfs to ext4
-
-## format/mount
-
-foobar and etc
-
 ## kernel
 
-kernel stock
+kernel stock check
 
 ## live files + yml
 
 instead of in script
-
-## btrfs
-
-check scrub unit
