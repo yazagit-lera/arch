@@ -18,4 +18,4 @@ main() {
     adb connect "${ip}:5555"
 }
 
-main "${@}"
+main
