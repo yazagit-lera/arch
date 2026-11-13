@@ -63,7 +63,7 @@ main() {
   local password="${1}"
 
   setup_pacman
-  disk_partition "${blk}"
+  format_disk
   pacstrap /mnt $(cat foo)
   post_install "${password}"
   end
