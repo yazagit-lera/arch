@@ -14,7 +14,7 @@ cursor = {text="CellBackground", cursor="#ffffff"}
 [colors.normal]
 black = "#101020"
 red = "#ff7171"
-green = "<string>"
+green = "#00b800"
 yellow = "<string>"
 blue = "<string>"
 magenta = "<string>"
