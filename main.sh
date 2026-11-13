@@ -35,9 +35,7 @@ disk_partition() {
   mke2fs -t ext4 -vF -L arch-linux -E nodiscard \
     -O bigalloc,inline_data "${root}"
 
-  local root_options
-  root_options='noatime,nodiscard,journal_checksum'
-
+  local root_options='noatime,nodiscard,journal_checksum'
   local efi_options
   efi_options='noexec,nodev,nosuid,noatime,fmask=0177,dmask=0077'
   efi_options+=',nosymfollow,X-mount.mkdir=600'
