@@ -1,5 +1,9 @@
 # To do
 
+## fs
+
+ext4
+
 ## bashrc
 
 copy to /root
