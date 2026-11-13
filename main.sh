@@ -35,8 +35,7 @@ disk_partition() {
   mkfs.btrfs -fK -L archlinux --csum xxhash "${root}"
 
   local btrfs_options
-  btrfs_options='noatime,nodiscard,nobarrier,commit=300,lazytime,ssd'
-  btrfs_options+=',compress-force=zstd:3'
+  btrfs_options='noatime,nodiscard,ssd,compress=zstd:3'
 
   local fat_options
   fat_options='noexec,nodev,nosuid,noatime,fmask=0177,dmask=0077'
