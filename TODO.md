@@ -5,6 +5,9 @@
 > [!WARNING]
 > check scrub unit
 
+[Service]
+IOReadBandwidthMax=/dev/sda 50M
+
 ## bashrc
 
 copy to /root
