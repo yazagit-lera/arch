@@ -32,7 +32,8 @@ disk_partition() {
   udevadm wait "${efi}" "${root}"
 
   mkfs.fat -F32 -n ESP -v --codepage=437 "${efi}"
-  mke2fs -t ext4 -vF -L archlinux -E nodiscard -O bigalloc,inline_data "${root}"
+  mke2fs -t ext4 -vF -L archlinux -E nodiscard \
+    -O bigalloc,inline_data "${root}"
 
   local root_options
   root_options='noatime,nodiscard,journal_checksum,rw'
