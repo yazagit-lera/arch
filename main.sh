@@ -32,14 +32,14 @@ disk_partition() {
   udevadm wait "${efi}" "${root}"
 
   mkfs.fat -F32 -n ESP -v --codepage=437 "${efi}"
-  mke2fs -t ext4 -vF -L archlinux -E nodiscard -O bigalloc,uninit_bg "${root}"
+  mke2fs -t ext4 -vF -L archlinux -E nodiscard -O bigalloc,inline_data "${root}"
 
   local root_options
-  root_options='noatime,nodiscard,ssd,compress=zstd:3,subvol=/'
+  root_options='noatime,nodiscard,journal_checksum,rw'
 
   local efi_options
   efi_options='noexec,nodev,nosuid,noatime,fmask=0177,dmask=0077'
-  efi_options+=',nosymfollow,X-mount.mkdir=600'
+  efi_options+=',nosymfollow,X-mount.mkdir=600,rw'
 
   mount -t ext4 -v -o "${root_options}" "${root}" /mnt
   mount -t vfat -v -o  "${efi_options}" "${efi}" /mnt/boot
