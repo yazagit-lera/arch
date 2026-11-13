@@ -20,12 +20,11 @@ gnome-control-center
 gnome-keyring
 gdm
 
+dosfstools
+exfatprogs
+
 ttf-roboto
 ttf-jetbrains-mono
-
-btrfs-progs
-exfatprogs
-dosfstools
 
 alacritty
 android-tools
