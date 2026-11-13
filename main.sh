@@ -32,23 +32,23 @@ disk_partition() {
   udevadm wait "${efi}" "${root}"
 
   mkfs.fat -F32 -n ESP -v --codepage=437 "${efi}"
-  mkfs.btrfs -fK -L archlinux --csum xxhash "${root}"
+  mke2fs -t ext4 -vF -L archlinux -E nodiscard -O bigalloc,uninit_bg "${root}"
 
-  local btrfs_options
-  btrfs_options='noatime,nodiscard,ssd,compress=zstd:3,subvol=/'
+  local root_options
+  root_options='noatime,nodiscard,ssd,compress=zstd:3,subvol=/'
 
-  local fat_options
-  fat_options='noexec,nodev,nosuid,noatime,fmask=0177,dmask=0077'
-  fat_options+=',nosymfollow,X-mount.mkdir=600'
+  local efi_options
+  efi_options='noexec,nodev,nosuid,noatime,fmask=0177,dmask=0077'
+  efi_options+=',nosymfollow,X-mount.mkdir=600'
 
-  mount -t btrfs -v -o "${btrfs_options}" "${root}" /mnt
-  mount -t vfat -v -o  "${fat_options}" "${efi}" /mnt/boot
+  mount -t ext4 -v -o "${root_options}" "${root}" /mnt
+  mount -t vfat -v -o  "${efi_options}" "${efi}" /mnt/boot
 }
 
 post_install() {
   local password="${1}"
 
-  mount -o bind,ro -v /tmp/arch39 /mnt/mnt
+  mount -o bind,ro -v /tmp/arch /mnt/mnt
   arch-chroot /mnt bash /mnt/chroot.sh "${password}"
   umount -v /mnt/mnt
 }
@@ -64,7 +64,7 @@ main() {
   setup_pacman
   disk_partition "${blk}"
   pacstrap /mnt $(cat foo)
-  setup_chroot "${password}"
+  post_install "${password}"
   end
 }
 
