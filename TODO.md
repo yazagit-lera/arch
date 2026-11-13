@@ -5,6 +5,10 @@
 > [!WARNING]
 > check scrub unit
 
+## bashrc
+
+copy to /root
+
 ## gsettings
 
 no cursor blink, dark theme
