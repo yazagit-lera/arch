@@ -39,7 +39,7 @@ disk_partition() {
 
   local fat_options
   fat_options='noexec,nodev,nosuid,noatime,fmask=0177,dmask=0077'
-  fat_options+=',X-mount.mkdir=600'
+  fat_options+=',nosymfollow,X-mount.mkdir=600'
 
   mount -t btrfs -v -o "${btrfs_options}" "${root}" /mnt
   mount -t vfat -v -o  "${fat_options}" "${efi}" /mnt/boot
