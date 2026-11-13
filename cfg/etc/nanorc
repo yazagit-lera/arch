@@ -1,0 +1,28 @@
+include "/usr/share/nano/*.nanorc"
+
+set jumpyscrolling
+set tabstospaces
+set constantshow
+set colonparsing
+set linenumbers
+set autoindent
+set afterends
+set smarthome
+set tabsize 4
+set atblanks
+set minibar
+set nohelp
+set unix
+
+bind ^b findbracket main
+bind ^r recordmacro main
+bind ^s savefile main
+bind ^n runmacro main
+bind ^v paste main
+bind ^q exit main
+bind ^c copy main
+bind ^z undo main
+bind ^y redo main
+bind ^w mark main
+bind ^x cut main
+bind ^d zap main
