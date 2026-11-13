@@ -10,3 +10,13 @@ size = 13
 foreground = "#cfcfcf"
 background = "#101020"
 cursor = {text="CellBackground", cursor="#ffffff"}
+
+[colors.normal]
+black = "#101020"
+red = "<string>"
+green = "<string>"
+yellow = "<string>"
+blue = "<string>"
+magenta = "<string>"
+cyan = "<string>"
+white = "<string>"
