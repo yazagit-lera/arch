@@ -6,6 +6,9 @@ normal = {family="JetBrains Mono", style="Regular"}
 bold = {family="JetBrains Mono", style="Regular"}
 size = 13
 
+[cursor]
+style = {shape="Block", blinking="Never"}
+
 [colors.primary]
 foreground = "#cfcfcf"
 background = "#101020"
