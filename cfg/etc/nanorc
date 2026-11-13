@@ -1,12 +1,13 @@
 include "/usr/share/nano/*.nanorc"
 
+unset breaklonglines
+
 set jumpyscrolling
 set tabstospaces
 set constantshow
 set colonparsing
 set linenumbers
 set autoindent
-set afterends
 set smarthome
 set tabsize 4
 set atblanks
