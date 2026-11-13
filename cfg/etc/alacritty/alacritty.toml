@@ -9,12 +9,16 @@ size = 13
 [cursor]
 style = {shape="Block", blinking="Never"}
 
-[colors.primary]
-foreground = "#cfcfcf"
-background = "#101020"
+[colors]
 cursor = {text="CellBackground", cursor="#ffffff"}
 
+[colors.primary]
+# 12.0:1
+foreground = "#cfcfcf"
+background = "#101020"
+
 [colors.normal]
+# 7.0:1
 black = "#101020"
 red = "#ff7171"
 green = "#10b810"
