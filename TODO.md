@@ -1,8 +1,8 @@
 # To do
 
-## fs
+## scripts
 
-ext4
+peredelat
 
 ## bashrc
 
