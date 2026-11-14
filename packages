@@ -19,6 +19,8 @@ gnome-shell
 gnome-control-center
 gnome-keyring
 gdm
+oo7
+libsecret
 
 dosfstools
 exfatprogs
