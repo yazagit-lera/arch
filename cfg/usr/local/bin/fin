@@ -1,31 +1,15 @@
 #!/usr/bin/env bash
-#
+# SPDX-License-Identifier: 0BSD
 # Finish up the installation
-set -e
-
-usage() {
-  echo "usage: ${0##*/} [-h]"
-  echo
-  echo 'finish up the installation'
-  echo
-  echo 'options:'
-  echo '  -h  show this help message and exit'
-
-  exit "${1}"
-}
+set -e -o pipefail
 
 main() {
-  if (($(id -u) == 0)); then
-    echo '! Do not run this script as root'
-    exit 1
-  fi
-
-  [[ "${@}" == '-h' ]] && usage 0
-  ((${#} != 0)) && usage 1 >&2
-
-  mkdir -p "${HOME}/"{atp,trash}
+  mkdir -p "${HOME}/ap2"
   gsettings set org.gnome.desktop.interface cursor-blink false
-  gsettings set org.gnome.desktop.wm.preferences button-layout 'menu:'
+  gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+  gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
+  gsettings set org.gnome.desktop.peripherals.keyboard delay 200
+  gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 
   flatpak install flathub org.inkscape.Inkscape \
     org.onlyoffice.desktopeditors io.mpv.Mpv net.waterfox.waterfox \
