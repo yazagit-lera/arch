@@ -9,11 +9,9 @@ main() {
   gsettings set org.gnome.desktop.interface color-scheme prefer-dark
   gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
   gsettings set org.gnome.desktop.peripherals.keyboard delay 200
-  gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
+  gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 50
 
-  flatpak install flathub org.inkscape.Inkscape \
-    org.onlyoffice.desktopeditors io.mpv.Mpv net.waterfox.waterfox \
-    dev.vencord.Vesktop org.telegram.desktop --noninteractive
+  flatpak install flathub com.brave.Browser com.discordapp.Discord org.onlyoffice.desktopeditors org.telegram.desktop --noninteractive
 }
 
-main "${@}"
+main
