@@ -11,28 +11,28 @@ configure_services() {
 }
 
 configure_system() {
-  local password="${1}"
-  local user_name='sakikasa'
+    local password="${1}"
+    local user_name='sakikasa'
 
-  ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
-  hwclock -w --utc
+    ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+    hwclock -w --utc
 
-  tar --uid 0 --gid 0 -x -f /mnt/cfg.tar -C /
-  pacman -Scc --noconfirm
-  bootctl install --esp-path=/boot
+    tar --uid 0 --gid 0 -x -f /mnt/cfg.tar -C /
+    pacman -Scc --noconfirm
+    bootctl install --esp-path=/boot
 
-  usermod --lock -s /usr/bin/nologin root
-  cp /etc/skel/.bashrc /root
+    usermod --lock -s /usr/bin/nologin root
+    install -m 600 -o root -g root /etc/skel/.bash /root
 
-  useradd --create-home -G wheel,video -s /usr/bin/bash "${user_name}"
-  echo "${user_name}:${password}" | chpasswd
+    useradd --create-home -G wheel,video -s /usr/bin/bash "${user_name}"
+    echo "${user_name}:${password}" | chpasswd
 }
 
 main() {
-  local password="${1}"
+    local password="${1}"
 
-  configure_system "${password}"
-  configure_services
+    configure_system "${password}"
+    configure_services
 }
 
 main "${1}"
