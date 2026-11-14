@@ -24,7 +24,7 @@ configure_system() {
     usermod --lock -s /usr/bin/nologin root
     install -m 600 -o root -g root /etc/skel/.bash /root
 
-    useradd --create-home -G wheel,video -s /usr/bin/bash "${user_name}"
+    useradd -m -G wheel,audio,video -s /usr/bin/bash "${user_name}"
     echo "${user_name}:${password}" | chpasswd
 }
 
