@@ -22,6 +22,8 @@ configure_system() {
   bootctl install --esp-path=/boot
 
   usermod --lock -s /usr/bin/nologin root
+  cp /etc/skel/.bashrc /root
+
   useradd --create-home -G wheel,video -s /usr/bin/bash "${user_name}"
   echo "${user_name}:${password}" | chpasswd
 }
