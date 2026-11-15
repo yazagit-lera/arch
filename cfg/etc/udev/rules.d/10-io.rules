@@ -6,6 +6,6 @@ KERNEL=="zram[0-9]", GOTO="zram"
 ATTR{queue/scheduler}="kyber"
 
 LABEL="zram"
-ATTR{queue/rotational}="0", ATTR{queue/read_ahead_kb}="0"
+ATTR{queue/rotational}="0"
 
 LABEL="end"
