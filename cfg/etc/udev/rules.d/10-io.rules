@@ -3,7 +3,7 @@ SUBSYSTEM!="block", GOTO="end"
 ATTR{partition}=="*", GOTO="end"
 KERNEL=="zram[0-9]", GOTO="zram"
 
-ATTR{queue/scheduler}="none", ATTR{queue/rq_affinity}="2"
+ATTR{queue/scheduler}="none"
 
 LABEL="zram"
 ATTR{queue/rotational}="0", ATTR{queue/read_ahead_kb}="4"
