@@ -3,10 +3,9 @@ SUBSYSTEM!="block", GOTO="end"
 ATTR{partition}=="*", GOTO="end"
 KERNEL=="zram[0-9]", GOTO="zram"
 
-ATTR{queue/scheduler}="none", ATTR{queue/nr_requests}="128", \
-    ATTR{queue/rq_affinity}="2"
+ATTR{queue/scheduler}="none", ATTR{queue/rq_affinity}="2"
 
 LABEL="zram"
-ATTR{queue/rotational}="0", ATTR{queue/read_ahead_kb}="512"
+ATTR{queue/rotational}="0", ATTR{queue/read_ahead_kb}="4"
 
 LABEL="end"
