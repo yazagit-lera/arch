@@ -8,7 +8,7 @@ main() {
 
     local options
     options='^has_journal,^metadata_csum,^metadata_csum_seed,^orphan_file'
-    options+=',sparse_super2,uninit_bg'
+    options+=',sparse_super2'
 
     local extended_options
     extended_options='num_backup_sb=0,lazy_itable_init=1'
