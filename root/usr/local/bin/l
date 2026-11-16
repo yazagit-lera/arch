@@ -4,8 +4,10 @@
 set -e -o pipefail
 
 main() {
+    local files="${@}"
+
     LS_COLORS='ow=1;34:tw=1;34' ls -Ggaph --time-style=+ \
-        --color=always -- "${@}" | column
+        --color=always -- ${files} | column
 }
 
 main "${@}"
