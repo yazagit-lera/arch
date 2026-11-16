@@ -22,9 +22,7 @@ disk_partition() {
     local root='/dev/nvme0n1p2'
 
     mountpoint -q /mnt && umount -R /mnt
-    echo 'none' > "/sys/block/${block}/queue/scheduler"
-    echo '128' > "/sys/block/${block}/queue/nr_requests"
-    echo '2' > "/sys/block/${block}/queue/rq_affinity"
+    echo 'kyber' > "/sys/block/${block}/queue/scheduler"
 
     wipefs -a "${efi}" "${root}" "${disk}"
     blkdiscard -vf "${disk}"
