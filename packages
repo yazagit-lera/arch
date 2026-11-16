@@ -17,7 +17,7 @@ xdg-desktop-portal-gnome
 evince
 gnome-shell
 gnome-control-center
-gnome-keyring
+power-profiles-daemon
 nautilus
 gdm
 oo7
@@ -30,6 +30,7 @@ ttf-roboto
 ttf-jetbrains-mono
 
 alacritty
+networkmanager
 android-tools
 doas
 flatpak
