@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: 0BSD
-# Post install
+# chroot configuration
 set -e -o pipefail
 
 configure_services() {
