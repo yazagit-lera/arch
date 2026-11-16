@@ -24,7 +24,7 @@ configure_system() {
     bootctl install --esp-path=/boot
 
     usermod --lock -s /usr/bin/nologin root
-    install -m 640 -o root -g root /etc/skel/.bashrc /root
+    install -m 600 -o root -g root /etc/skel/.bashrc /root
     chmod 400 /etc/doas.conf
 
     useradd -m -G wheel,audio,video -s /usr/bin/bash "${user_name}"
