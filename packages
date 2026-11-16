@@ -34,8 +34,9 @@ doas
 flatpak
 zram-generator
 nano
+bash-completion
 python
-mandoc
+man-db
 less
 unzip
 zip
