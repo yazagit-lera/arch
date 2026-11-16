@@ -4,11 +4,10 @@
 set -e -o pipefail
 
 setup_pacman() {
-    local archive="${1}/root.tar"
+    local path="${1}/root/etc"
 
-    tar -xO -f "${archive}" ./etc/pacman.conf > /etc/pacman.conf
-    tar -xO -f "${archive}" ./etc/pacman.d/mirrorlist \
-        > /etc/pacman.d/mirrorlist
+    cp "${path}/pacman.conf" /etc
+    cp "${path}/etc/pacman.d/mirrorlist" /etc
 
     pacman-key --init
     pacman-key --populate archlinux
