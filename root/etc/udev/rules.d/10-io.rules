@@ -1,0 +1,8 @@
+ACTION!="add", GOTO="end"
+SUBSYSTEM!="block", GOTO="end"
+ENV{DEVTYPE}=="partition", GOTO="end"
+KERNEL=="zram[0-9]", GOTO="end"
+
+ATTR{queue/rotational}="0", ATTR{queue/scheduler}="kyber"
+
+LABEL="end"

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
+# adb connect
+set -e -o pipefail
+
+main() {
+    adb kill-server
+    adb start-server
+
+    echo '- Waititng for a USB connected device...'
+    adb wait-for-usb-device
+
+    local ip
+    ip="$(adb exec-out toybox ifconfig -S \
+        | awk '/wlan0/ {print $2}' | awk -F/ '{print $1}')"
+    adb tcpip 5555
+
+    echo '- Disconnect your device from USB'
+    adb wait-for-usb-disconnect
+    adb connect "${ip}:5555"
+}
+
+main

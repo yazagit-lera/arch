@@ -1,0 +1,52 @@
+[general]
+live_config_reload = false
+
+[window]
+dynamic_padding = true
+padding = {x=4}
+
+[font]
+normal = {family="JetBrains Mono", style="Regular"}
+bold = {family="JetBrains Mono", style="Regular"}
+offset = {y=2}
+size = 14
+
+[keyboard]
+bindings = [
+    {key="i", mods="Alt", action="ScrollHalfPageUp"},
+    {key="o", mods="Alt", action="ScrollHalfPageDown"},
+    {key="+", mods="Control", action="None"},
+    {key="-", mods="Control", action="None"}
+]
+
+[cursor]
+style = {shape="Block", blinking="Never"}
+
+[colors]
+cursor = {text="CellBackground", cursor="#ffffff"}
+
+[colors.primary]
+# 12.0:1
+foreground = "#cfcfcf"
+background = "#101020"
+
+[colors.normal]
+# 7.0:1
+black = "#101020"
+red = "#ff7171"
+green = "#10b810"
+yellow = "#a4a410"
+blue = "#9393ff"
+magenta = "#ff50ff"
+cyan = "#10b0b0"
+white = "#cfcfcf"
+
+[colors.bright]
+black = "#101020"
+red = "#ff7171"
+green = "#10b810"
+yellow = "#a4a410"
+blue = "#9393ff"
+magenta = "#ff50ff"
+cyan = "#10b0b0"
+white = "#cfcfcf"
