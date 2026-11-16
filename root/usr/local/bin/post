@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
+# Post install
+set -e -o pipefail
+
+apply_settings() {
+    gsettings set org.gnome.desktop.interface clock-format 24h
+    gsettings set org.gnome.desktop.interface cursor-blink false
+    gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+    gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
+    gsettings set org.gnome.desktop.peripherals.keyboard delay 200
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 50
+}
+
+main() {
+    apply_settings
+    mkdir -p "${HOME}/ap2"
+    flatpak install flathub com.brave.Browser com.discordapp.Discord org.onlyoffice.desktopeditors org.telegram.desktop --noninteractive
+}
+
+main
