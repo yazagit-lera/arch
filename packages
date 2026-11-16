@@ -18,6 +18,7 @@ evince
 gnome-shell
 gnome-control-center
 gnome-keyring
+nautilus
 gdm
 oo7
 libsecret
