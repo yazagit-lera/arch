@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: 0BSD
-# Get the command path
+# Get the path of command
 set -e -o pipefail
 
 main() {
