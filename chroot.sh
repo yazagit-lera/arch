@@ -17,7 +17,7 @@ configure_system() {
     ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
     hwclock -w --utc
 
-    tar --uid 0 --gid 0 -x -f /mnt/cfg.tar -C /
+    cp -Tr /mnt/root /
     pacman -Scc --noconfirm
     bootctl install --esp-path=/boot
 
