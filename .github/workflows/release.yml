@@ -12,7 +12,10 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Archive
-        run: bash ./.github/archive.sh
+        run: tar --exclude-vcs -cv -b1 -f ./arch.tar .
+
+      - name: Compress
+        run: lz4 -zv ./arch.tar
 
       - name: Release
         run: bash ./.github/release.sh
