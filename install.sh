@@ -11,7 +11,7 @@ main() {
         exit 1
     fi
 
-    [[ -d "${tmp_dir}" ]] && rm -rf -- "${tmp_dir}"
+    [[ -d "${tmp_dir}" ]] && rm -rf "${tmp_dir}"
     mkdir -p -- "${tmp_dir}"
 
     local archive
