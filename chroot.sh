@@ -14,10 +14,11 @@ configure_system() {
     local password="${1}"
     local user_name='sakikasa'
 
+    umask 022
     ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
-    hwclock -w --utc
+    hwclock -uw
 
-    cp -Tr /mnt/root /
+    cp -Tr --no-preserve=mode /mnt/root /
     pacman -Scc --noconfirm
     bootctl install --esp-path=/boot
 
