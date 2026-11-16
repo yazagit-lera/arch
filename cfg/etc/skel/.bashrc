@@ -3,10 +3,7 @@
 
 main() {
     [[ "${-}" =~ 'i' ]] || return
-
-    local color='\033[33m'
-    local default_color='\033[0m'
-    PS1="\[${color}\]\$ \W \${?}\[${default_color}\]\n"
+    PS1='\[\033[33m\]\$ \W ${?}\[\033[0m\]\n'
 }
 
 main
