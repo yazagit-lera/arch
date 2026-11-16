@@ -12,11 +12,14 @@ apply_settings() {
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 50
 }
 
-main() {
-    apply_settings
-    mkdir -p "${HOME}/ap2"
+install_packages() {
     flatpak install flathub com.brave.Browser com.discordapp.Discord \
         org.onlyoffice.desktopeditors org.telegram.desktop --noninteractive
+}
+
+main() {
+    apply_settings
+    install_packages
 }
 
 main
