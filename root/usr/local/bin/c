@@ -1,27 +1,13 @@
 #!/usr/bin/env bash
-#
+# SPDX-License-Identifier: 0BSD
 # Get the command path
 set -e -o pipefail
-
-usage() {
-    local status="${1}"
-
-    echo "Usage: ${0##*/} [-h] COMMAND"
-    echo
-    echo 'Get the command path'
-    echo
-    echo 'Options:'
-    echo '  -h  Show this help message and exit'
-    exit "${status}"
-}
 
 main() {
   local cmd="${1}"
 
-  (("${#}" == 0)) && usage 1
-  [[ "${1}" == '-h' ]] && usage 0
-
-  command -v "${command}"
+  [[ -z "${cmd}" ]] && exit 1
+  type -fpP "${cmd}"
 }
 
 main "${1}"
