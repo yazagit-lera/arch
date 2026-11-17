@@ -23,7 +23,6 @@ format_disk() {
     mountpoint -q /mnt && umount -R /mnt
     echo 'kyber' > "/sys/block/${block}/queue/scheduler"
 
-    wipefs -a "${efi}" "${root}" "${disk}"
     blkdiscard -vf "${disk}"
     sgdisk -Zo \
         -n1:0:+512M -t1:ef00 -c1:'EFI System Partition' \
