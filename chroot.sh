@@ -28,7 +28,7 @@ configure_system() {
     chmod -R 755 /usr/local/bin
     chmod 400 /etc/doas.conf
     
-    useradd -m -G wheel,audio,video -s /usr/bin/bash "${user_name}"
+    useradd -m -G wheel,video -s /usr/bin/bash "${user_name}"
     echo "${user_name}:${password}" | chpasswd
 }
 
