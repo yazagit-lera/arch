@@ -13,7 +13,8 @@ apply_settings() {
 
 install_packages() {
     flatpak install flathub com.brave.Browser com.discordapp.Discord \
-        org.onlyoffice.desktopeditors org.telegram.desktop --noninteractive
+        org.onlyoffice.desktopeditors org.telegram.desktop \
+        org.gnome.Loupe --noninteractive
 }
 
 main() {
