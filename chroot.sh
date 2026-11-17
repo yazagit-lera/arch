@@ -19,7 +19,7 @@ configure_system() {
     ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
     hwclock -uw
 
-    cp -Tr --no-preserve=mode /mnt/root /
+    cp -TR --no-preserve=mode /mnt/root /
     pacman -Scc --noconfirm
     bootctl install --esp-path=/boot
 
