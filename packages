@@ -12,6 +12,7 @@ mesa
 polkit
 pipewire-pulse
 pipewire-jack
+rtkit
 
 xdg-desktop-portal-gnome
 evince
