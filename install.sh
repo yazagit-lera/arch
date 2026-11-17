@@ -21,7 +21,7 @@ main() {
     curl -fL "${archive}" | zstd -dvc | tar -x -C "${tmp_dir}"
     local password
     password="$(systemd-ask-password --echo=no --emoji=no 'New password:')"
-    bash "${tmp_dir}/main.sh" "${password}"
+    bash "${tmp_dir}/main.sh" "${password}" "${tmp_dir}"
 }
 
 main
