@@ -16,7 +16,7 @@ main() {
 
     local archive
     archive='https://github.com/yazagit-lera/arch/releases/download'
-    archive+='/rolling/arch.tar.lz4'
+    archive+='/rolling/arch.tar.zst'
 
     curl -fL "${archive}" | zstd -dvc | tar -x --no-same-owner -C "${tmp_dir}"
     local password
