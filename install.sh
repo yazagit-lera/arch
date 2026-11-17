@@ -18,7 +18,7 @@ main() {
     archive='https://github.com/yazagit-lera/arch/releases/download'
     archive+='/rolling/arch.tar.lz4'
 
-    curl -fL "${archive}" | zstd -dvc | tar -x --uid 0 --gid 0 -C "${tmp_dir}"
+    curl -fL "${archive}" | zstd -dvc | tar -x --no-same-owner -C "${tmp_dir}"
     local password
     password="$(systemd-ask-password --echo=no --emoji=no 'New password:')"
     bash "${tmp_dir}/main.sh" "${password}" "${tmp_dir}"
