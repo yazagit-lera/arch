@@ -12,7 +12,7 @@ main() {
     fi
 
     [[ -d "${tmp_dir}" ]] && rm -rf "${tmp_dir}"
-    mkdir -p -- "${tmp_dir}"
+    mkdir -p "${tmp_dir}"
 
     local archive
     archive='https://github.com/yazagit-lera/arch/releases/download'
