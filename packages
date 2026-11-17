@@ -31,6 +31,7 @@ ttf-jetbrains-mono
 
 alacritty
 networkmanager
+dnsmasq
 android-tools
 doas
 flatpak
