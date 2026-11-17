@@ -6,7 +6,7 @@ My arch linux installer
 
 ## Installation
 
-Use archiso
+Use [archiso](https://archlinux.org/download/)
 ```shell
 bash -c "$(curl -f 'https://raw.githubusercontent.com/yazagit-lera/arch/main/install.sh')"
 ```
