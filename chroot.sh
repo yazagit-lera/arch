@@ -25,9 +25,9 @@ configure_system() {
 
     usermod --lock -s /usr/bin/nologin root
     install -m 600 -o root -g root /etc/skel/.bashrc /root
+    chmod -R 755 /usr/local/bin
     chmod 400 /etc/doas.conf
-    chmod 755 /usr/local/bin
-
+    
     useradd -m -G wheel,audio,video -s /usr/bin/bash "${user_name}"
     echo "${user_name}:${password}" | chpasswd
 }
