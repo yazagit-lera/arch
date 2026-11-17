@@ -7,14 +7,14 @@ setup_pacman() {
     local path="${1}/root/etc"
 
     cp "${path}/pacman.conf" /etc
-    cp "${path}/etc/pacman.d/mirrorlist" /etc
+    cp "${path}/pacman.d/mirrorlist" /etc
 
     pacman-key --init
     pacman-key --populate archlinux
-    pacman -Syy archlinux-keyring --needed --noconfirm
+    pacman -Syy archlinux-keyring --noconfirm
 }
 
-disk_partition() {
+format_disk() {
     local block='nvme0n1'
     local disk='/dev/nvme0n1'
     local efi='/dev/nvme0n1p1'
