@@ -11,7 +11,8 @@ My arch linux installer
 
 ## Installation
 
-Use [archiso](https://archlinux.org/download/)
+> [!CAUTION]
+> This will brick your device
 ```shell
 bash -c "$(curl -f 'https://raw.githubusercontent.com/yazagit-lera/arch/main/install.sh')"
 ```
