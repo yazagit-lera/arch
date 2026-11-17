@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Archive
-        run: tar --exclude-vcs -cv -b1 -f ../arch.tar .
+        run: tar --exclude-vcs -cv -f ../arch.tar .
 
       - name: Compress
         run: zstd -zv -o ./arch.tar.zst ../arch.tar
