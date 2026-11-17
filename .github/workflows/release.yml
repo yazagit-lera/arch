@@ -15,7 +15,7 @@ jobs:
         run: tar --exclude-vcs -cv -b1 -f ./arch.tar .
 
       - name: Compress
-        run: lz4 -zv ./arch.tar
+        run: zstd -zv -o arch.tar.zst ./arch.tar
 
       - name: Release
         run: bash ./.github/release.sh
