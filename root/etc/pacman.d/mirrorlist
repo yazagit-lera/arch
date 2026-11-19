@@ -1,2 +1,2 @@
 Server = https://ru.mirrors.cicku.me/archlinux/$repo/os/$arch
-Server = https://archlinux.gay/archlinux/
+Server = https://archlinux.gay/archlinux/$repo/os/$arch
