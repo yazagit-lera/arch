@@ -6,6 +6,7 @@ main() {
     bind 'set blink-matching-paren on'
     bind 'set page-completions off'
     bind 'TAB: menu-complete'
+    . /usr/share/z/z.sh
 }
 
 main
