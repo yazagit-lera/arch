@@ -5,7 +5,7 @@ xdg-user-dirs
 
 amd-ucode
 linux-firmware-realtek
-linux-firmware-radeon
+linux-firmware-amdgpu
 vulkan-radeon
 mesa
 
