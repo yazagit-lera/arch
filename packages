@@ -24,9 +24,9 @@ gdm
 oo7
 libsecret
 
-e2fsprogs
 dosfstools
 exfatprogs
+e2fsprogs
 
 ttf-roboto
 ttf-jetbrains-mono
