@@ -2,11 +2,10 @@
 # bash config
 
 main() {
-    PS1='\[\033[33m\]\$ \W/ \[\033[34m\]${?}\[\033[0m\]\n'
+    PS1='\[\e[33m\]\$ \W/ \[\e[34m\]${?}\[\e[0m\]\n'
     bind 'set blink-matching-paren on'
     bind 'set page-completions off'
     bind 'TAB: menu-complete'
-    . /usr/share/z/z.sh
 }
 
 main
