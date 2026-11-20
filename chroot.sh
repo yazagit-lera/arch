@@ -24,7 +24,8 @@ configure_system() {
     bootctl install --esp-path=/boot
 
     usermod --lock -s /usr/bin/nologin root
-    install -m 600 -o root -g root /etc/skel/.bashrc /root
+    install -m 600 -o root -g root \
+        /etc/skel/.bashrc /etc/skel/.inputrc /root
     chmod -R 755 /usr/local/bin
     chmod 400 /etc/doas.conf
     
