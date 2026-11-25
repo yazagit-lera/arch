@@ -1,6 +1,6 @@
 ## gnome
 
-disable time based suspension, maximized windows
+disable time based suspension
 
 ## roboto
 
