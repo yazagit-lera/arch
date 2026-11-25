@@ -6,6 +6,7 @@ My arch linux installer
 
 - [alacritty.toml](/root/etc/alacritty/alacritty.toml)
 - [.bashrc](/root/etc/skel/.bashrc)
+- [.inputrc](/root/etc/skel/.inputrc)
 - [nanorc](/root/etc/nanorc)
 - [scripts](/root/usr/local/bin)
 
