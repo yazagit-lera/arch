@@ -3,6 +3,7 @@ live_config_reload = false
 
 [window]
 decorations_theme_variant = "Dark"
+startup_mode = "Maximized"
 dynamic_padding = true
 padding = {x=4}
 
