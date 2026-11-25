@@ -6,7 +6,6 @@ set -e -o pipefail
 main() {
     local blk="${1}"
 
-    umount -v "/dev/${blk}"
     echo '1' > "/sys/block/${blk}/device/delete"
 }
 
