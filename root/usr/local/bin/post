@@ -5,6 +5,11 @@ set -e -o pipefail
 
 apply_settings() {
     gsettings set org.gnome.nautilus.preferences sort-directories-first true
+    gsettings set \
+        org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 86400
+    gsettings set \
+        org.gnome.settings-daemon.plugins.power \
+        sleep-inactive-battery-timeout 86400
 
     gsettings set org.gnome.desktop.interface cursor-blink false
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
