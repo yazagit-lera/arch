@@ -16,9 +16,9 @@ setup_pacman() {
 
 format_disk() {
     local block='nvme0n1'
-    local disk='/dev/nvme0n1'
-    local efi='/dev/nvme0n1p1'
-    local root='/dev/nvme0n1p2'
+    local disk="/dev/${block}"
+    local efi="/dev/${block}p1"
+    local root="/dev/${block}p2"
 
     mountpoint -q /mnt && umount -R /mnt
     echo 'kyber' > "/sys/block/${block}/queue/scheduler"
