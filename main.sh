@@ -6,8 +6,8 @@ set -e -o pipefail
 setup_pacman() {
     local path="${1}/root/etc"
 
-    cp "${path}/pacman.conf" /etc
-    cp "${path}/pacman.d/mirrorlist" /etc
+    cp -v "${path}/pacman.conf" /etc
+    cp -v "${path}/pacman.d/mirrorlist" /etc
 
     pacman-key --init
     pacman-key --populate archlinux
@@ -38,7 +38,7 @@ format_disk() {
     efi_options+=',nosymfollow,X-mount.mkdir=600'
 
     mount -t ext4 -v -o "${root_options}" "${root}" /mnt
-    mount -t vfat -v -o  "${efi_options}" "${efi}" /mnt/boot
+    mount -t vfat -v -o "${efi_options}" "${efi}" /mnt/boot
 }
 
 post_install() {
