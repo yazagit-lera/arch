@@ -13,6 +13,7 @@ My arch linux installer
 
 > [!CAUTION]
 > This will brick your device
+
 ```shell
 bash -c "$(curl -f 'https://raw.githubusercontent.com/yazagit-lera/arch/main/install.sh')"
 ```
