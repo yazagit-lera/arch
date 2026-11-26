@@ -10,6 +10,10 @@ apply_settings() {
         org.gnome.settings-daemon.plugins.power \
         sleep-inactive-battery-timeout 86400
 
+    gsettings set org.gnome.desktop.privacy report-technical-problems true
+    gsettings set org.gnome.desktop.privacy disable-camera true
+    gsettings set org.gnome.desktop.privacy hide-identity true
+    
     gsettings set org.gnome.desktop.interface cursor-blink false
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
     gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
