@@ -35,7 +35,7 @@ alacritty
 networkmanager
 dnsmasq
 android-tools
-doas
+opendoas
 flatpak
 zram-generator
 nano
