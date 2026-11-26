@@ -4,4 +4,4 @@ edit config, suspension
 
 ## gnome
 
-screen lock 15min
+screen lock 15min, lid action
