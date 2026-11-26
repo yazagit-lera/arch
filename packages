@@ -28,8 +28,9 @@ dosfstools
 exfatprogs
 e2fsprogs
 
-ttf-droid
 ttf-jetbrains-mono
+adwaita-fonts
+ttf-droid
 
 alacritty
 networkmanager
