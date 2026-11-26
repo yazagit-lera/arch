@@ -21,6 +21,8 @@ apply_settings() {
     gsettings set org.gnome.desktop.peripherals.mouse speed 1.0
     gsettings set \
         org.gnome.desktop.peripherals.touchpad disable-while-typing false
+    gsettings set \
+        org.gnome.desktop.input-sources sources [('xkb', 'us'), ('xkb', 'ru')]
 }
 
 install_packages() {
