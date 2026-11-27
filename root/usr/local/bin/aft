@@ -9,8 +9,8 @@ main() {
     local remote='/storage/emulated/0/aft'
 
     case "${cmd}" in
-        push) adb push "${file}" "${remote}" ;;
-        pull) adb pull "${remote}/${file}" ;;
+        push) adb push "${file}" "${remote}/${file}" ;;
+        pull) adb pull "${remote}/${file}" . ;;
         list) adb exec-out ls "${remote}" ;;
         *) exit 1 ;;
     esac
