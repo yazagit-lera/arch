@@ -13,5 +13,6 @@
     "touch_mode": "off",
     "use_console_experience": false,
     "use_libsecret": true,
-    "use_opengl": false
+    # Overheat
+    "use_opengl": true
 }
