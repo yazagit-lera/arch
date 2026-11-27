@@ -6,7 +6,7 @@ set -e -o pipefail
 configure_services() {
     systemctl enable \
         NetworkManager gdm systemd-timesyncd bluetooth \
-        nftables systemd-oomd fstrim.timer
+        nftables systemd-oomd tlp fstrim.timer
 
     systemctl mask NetworkManager-wait-online
 }
