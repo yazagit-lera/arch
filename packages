@@ -2,6 +2,7 @@ base
 linux
 booster
 xdg-user-dirs
+tlp
 
 amd-ucode
 linux-firmware-realtek
