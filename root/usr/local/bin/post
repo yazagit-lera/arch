@@ -22,7 +22,6 @@ apply_settings() {
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 50
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
     gsettings set org.gnome.desktop.peripherals.mouse accel-profile flat
-    gsettings set org.gnome.desktop.peripherals.mouse speed 1.0
     gsettings set \
         org.gnome.desktop.peripherals.touchpad disable-while-typing false
     gsettings set \
@@ -33,7 +32,7 @@ apply_settings() {
 install_packages() {
     flatpak install flathub \
         com.brave.Browser com.discordapp.Discord \
-        org.onlyoffice.desktopeditors org.telegram.desktop org.gnome.Loupe \
+        org.telegram.desktop org.gnome.Loupe \
         org.vinegarhq.Sober --noninteractive
 }
 
